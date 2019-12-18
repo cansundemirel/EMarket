@@ -16,6 +16,8 @@ using EMarket.Infrastructure.Data;
 using EMarket.ApplicationCore.Entities;
 using EMarket.ApplicationCore.Interfaces;
 using EMarket.ApplicationCore.Services;
+using EMarket.Web.Interfaces;
+using EMarket.Web.Services;
 
 namespace EMarket.Web
 {
@@ -47,6 +49,7 @@ namespace EMarket.Web
                 .AddDefaultTokenProviders();
 
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped<IHomeIndexViewModelService, HomeIndexViewModelService>();
             services.AddScoped<ICategoryService, CategoryService>();
 
 

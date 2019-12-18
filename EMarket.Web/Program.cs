@@ -19,24 +19,21 @@ namespace EMarket.Web
         public static async Task Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
-           
 
             using (var scope = host.Services.CreateScope())
             {
-                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                var dbContext =
+                    scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
                 ApplicationDbContextSeed.SeedProductsAndCategories(dbContext);
 
-                var userManager =
-                    scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                var roleManager =
-                    scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-               await ApplicationDbContextSeed.SeedUsersAndRolesAsync(userManager, roleManager);
-
+                await ApplicationDbContextSeed.SeedUsersAndRolesAsync(userManager, roleManager);
             }
-                host.Run();
+
+            host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

@@ -35,11 +35,11 @@ namespace EMarket.Infrastructure.Data
                 {
                     UserName = adminUserName,
                     Email = adminUserName
-                }, AuthorizationConstants.Roles.ADMINISTRATOR
+                }, AuthorizationConstants.DEFAULT_PASSWORD
                 );
 
-                var adminUser = await userManager.FindByNameAsync("admin@mail.com");
-                await userManager.AddToRoleAsync(adminUser, "admin");
+                var adminUser = await userManager.FindByNameAsync(adminUserName);
+                await userManager.AddToRoleAsync(adminUser, AuthorizationConstants.Roles.ADMINISTRATOR);
             }
         }
 
